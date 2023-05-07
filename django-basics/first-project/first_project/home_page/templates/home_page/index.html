@@ -1,0 +1,24 @@
+
+{% extends 'home_page/base.html' %}
+{% block content %}
+    <header>
+        <div>
+            <button><a href="user/logout">Log out</a></button>
+        </div>
+    </header>
+    <div>
+        <h3>Welcome </h3>
+    </div>
+    <section>
+        {% for product in products %}
+            <div>
+                <h1>{{product.title}}</h1>
+                
+                <p>MRP : {{product.price}}</p>
+                <p>Rating : {{prouct.rating}}</p>
+                
+            </div>
+            
+        {% endfor %}
+    </section>
+{% endblock content %}
