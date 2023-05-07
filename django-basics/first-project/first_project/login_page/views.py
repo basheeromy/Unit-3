@@ -6,16 +6,17 @@ from .froms import UserRegisterForm
 from django.contrib.auth.models import User
 
 def login_view(request):
-    if 'username' in request.session:
+    if 'userid' in request.session:
         return redirect('home_view') 
     if request.method == 'POST':
         usernm = request.POST['username']
         passwd = request.POST['password']
-        """userid = request.POST.get('id',False)
-        print(f"the user id is {userid}")"""
         user = authenticate(username = usernm,password = passwd)
+        userid = user.id
+        print(f'user id is {userid}')
+        
         if user is not None:
-            request.session['username'] = usernm
+            request.session['userid'] = userid
             return redirect('home_view')
         else:
             print("invalid credentials !")
@@ -36,7 +37,7 @@ def sign_up_view(request):
     return render(request,'login_page/sign_up.html',{'form':form})
 
 def log_out_view(request):
-    if 'username' in  request.session:
+    if 'userid' in  request.session:
         request.session.flush()
     return redirect('login_page')
     

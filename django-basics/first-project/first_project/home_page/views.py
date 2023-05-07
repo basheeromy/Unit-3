@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .models import Products
 
 products = Products.objects.all()
@@ -8,7 +7,7 @@ products = Products.objects.all()
 
 
 def home_view(request):
-    if 'username' in request.session:
+    if 'userid' in request.session:
         product = {
             'products' : products
         }
