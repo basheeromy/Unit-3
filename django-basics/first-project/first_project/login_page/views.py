@@ -4,7 +4,9 @@ from django.contrib.auth import authenticate
 from django.contrib import messages
 from .froms import UserRegisterForm
 from django.contrib.auth.models import User
+from django.views.decorators.cache import cache_control
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def login_view(request):
     if 'userid' in request.session:
         return redirect('home_view') 
